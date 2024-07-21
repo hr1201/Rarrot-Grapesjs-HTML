@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>GrapesJS</title>
+    <link rel="stylesheet" href="grapesjs/dist/css/grapes.min.css" />
+    <script src="grapesjs/dist/grapes.min.js"></script>
+    <!--引入grapesjs-preset-webpage-->
+    <link
+      rel="stylesheets"
+      href="https://grapesjs.com/stylesheets/grapesjs-preset-webpage.min.css"
+    />
+    <script src="https://grapesjs.com/js/grapesjs-preset-webpage.min.js?v0.1.11"></script>
+    <style>
+      body,
+      html {
+        height: 100%;
+        margin: 0;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="gjs" style="height: 0px; overflow: hidden"></div>
+
+    <script type="module">
+      import { addNavBar } from "./addNavBar.js";
+      import { addCaseCard } from "./addCaseCard.js";
+      import { addColumn } from "./addColumn.js";
+      import { addBaseBlock } from "./addBaseBlock.js";
+
+      var editor = grapesjs.init({
+        showOffsets: 1,
+        noticeOnUnload: 0,
+        container: '#gjs',
+        height: '100%',
+        fromElement: true,
+        storageManager: {
+          autoload: 0
+        },
+        styleManager: {
+          sectors: [{
+            name: 'General',
+            open: false,
+            buildProps: ['float', 'display', 'position', 'top', 'right', 'left', 'bottom']
+          }, {
+            name: 'Flex',
+            open: false,
+            buildProps: ['flex-direction', 'flex-wrap', 'justify-content', 'align-items', 'align-content',
+              'order', 'flex-basis', 'flex-grow', 'flex-shrink', 'align-self'
+            ]
+          }, {
+            name: 'Dimension',
+            open: false,
+            buildProps: ['width', 'height', 'max-width', 'min-height', 'margin', 'padding'],
+          }, {
+            name: 'Typography',
+            open: false,
+            buildProps: ['font-family', 'font-size', 'font-weight', 'letter-spacing', 'color', 'line-height',
+              'text-shadow'
+            ],
+          }, {
+            name: 'Decorations',
+            open: false,
+            buildProps: ['border-radius-c', 'background-color', 'border-radius', 'border', 'box-shadow',
+              'background'
+            ],
+          }, {
+            name: 'Extra',
+            open: false,
+            buildProps: ['transition', 'perspective', 'transform'],
+          }],
+        },
+      });
+
+      const config = {
+        // 需要添加的blcoks
+        blocks: [
+          "column1",
+          "column2",
+          "column3",
+          "column3-7",
+          "text",
+          "link",
+          "image",
+          "video",
+          "map",
+        ],
+        // 将flexbox用于网格
+        flexGrid: true,
+        // Class类的前缀
+        stylePrefix: "gjs-",
+        // 对blocks使用基本CSS
+        addBasicStyle: true,
+        category: "Basic",
+        // 以下为标签名
+        labelColumn1: "1 Column",
+        labelColumn2: "2 Columns",
+        labelColumn3: "3 Columns",
+        labelColumn37: "2 Columns 3/7",
+        labelText: "Text",
+        labelLink: "Link",
+        labelImage: "Image",
+        labelVideo: "Video",
+        labelMap: "Map",
+        // 初始行高
+        rowHeight: 75,
+        // ...opts,
+      };
+      // 添加官方demo的一些flex组件
+      addBaseBlock(editor, config);
+
+      //顶部导航栏组件数据
+      const opts = {
+        id: "navbar",
+        label: "Navbar",
+        classPrefix: "navbar",
+        style: "",
+        styleAdditional: "", // 附加样式
+      };
+      // 添加顶部导航栏
+      addNavBar(editor, opts);
+
+      editor.BlockManager.add("navbar", {
+        // 分类的展示图标
+        media: `<svg viewBox="0 0 24 24">
+            <path d="M22 9c0-.6-.5-1-1.25-1H3.25C2.5 8 2 8.4 2 9v6c0 .6.5 1 1.25 1h17.5c.75 0 1.25-.4 1.25-1V9Zm-1 6H3V9h18v6Z"/><path d="M15 10h5v1h-5zM15 13h5v1h-5zM15 11.5h5v1h-5z"/>
+        </svg>`,
+        label: "顶部导航",
+        category: "Rarrot",
+        select: true,
+        content: { type: "navbar" },
+      });
+
+      // 添加案例卡片
+      addCaseCard(editor);
+      editor.BlockManager.add("CaseCard", {
+        label: "案例卡片",
+        category: "Rarrot",
+        media:`<svg t="1720768327577" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15366" width="30" height="30"><path d="M860.2 159.3H729.7c-19.8-94.7-121.3-95-204.8-95s-185.1 0.3-204.8 95h-154c-28.9 0-52.4 23.5-52.4 52.4v695.5c0 28.9 23.5 52.4 52.4 52.4h694.1c28.9 0 52.4-23.5 52.4-52.4V211.7c-0.1-28.9-23.5-52.4-52.4-52.4z m-481 35.5c0-59.2 31-67.6 145.7-67.6s145.7 8.4 145.7 67.6v31.4H379.2v-31.4z m470.5 701.9H176.6V222.2h139.8V289h417.1v-66.9h116.2v674.6z" p-id="15367"></path><path d="M289.7 402.7c-17.4 0-31.4 14.1-31.4 31.4s14.1 31.4 31.4 31.4h471.5c17.4 0 31.4-14.1 31.4-31.4s-14.1-31.4-31.4-31.4H289.7zM642.9 556.3H289.7c-17.4 0-31.4 14.1-31.4 31.4s14.1 31.4 31.4 31.4h353.2c17.4 0 31.4-14.1 31.4-31.4s-14.1-31.4-31.4-31.4zM524.9 724H289.7c-17.4 0-31.4 14.1-31.4 31.4s14.1 31.4 31.4 31.4h235.2c17.4 0 31.4-14.1 31.4-31.4s-14-31.4-31.4-31.4z" p-id="15368"></path></svg>`,
+        select: true,
+        content: { type: "CaseCard" },
+      });
+
+      // flexbox组件
+      const opt = {
+        flexboxBlock: { category: "hr", label: "栏目组件" }, // 用来扩展默认的flexbox块
+        stylePrefix: "gjs-", // Class类的前缀
+        labelRow: "Row", // 行标签
+        labelColumn: "Column", // 列标签
+      };
+      addColumn(editor, opt);
+    </script>
+  </body>
+</html>
