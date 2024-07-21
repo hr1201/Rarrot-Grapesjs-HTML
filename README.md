@@ -17,3 +17,7 @@
 `config`是一个配置对象，其中包含了一系列的块（blocks），这些块是构建网页时可用的基本元素，如列、文本、链接、图片等。配置对象还包含了一些其他设置，如使用flexbox布局、类名前缀、是否添加基本样式等。将配置对象传给`addBaseBlock`，向编辑器添加这部分基础块。
 
 通过`editor.BlockManager.add`方法，向编辑器的块管理器中添加了一些自定义的块，如顶部导航栏和案例卡片。这些块配置了标签、分类、选择行为和内容类型，以及用于在编辑器的块面板中显示的媒体（如SVG图标）。
+
+## 📖 文档
+
+[Rarrot的博客](https://www.rarrot.ren/articles/%E5%8D%9A%E5%AE%A2/%E7%94%A8GrapesJS%E6%90%AD%E5%BB%BA%E4%BD%8E%E4%BB%A3%E7%A0%81%E5%B9%B3%E5%8F%B0(%E4%B8%80).html)
